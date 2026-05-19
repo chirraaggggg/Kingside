@@ -47,7 +47,20 @@ io.on("connection", (socket) => {
         try {
             if (chess.turn() === "w" && socket.id !== players.white) return
             if (chess.turn() === "b" && socket.id !== players.black) return
-        } catch (err) {}
+
+            const result = chess.move(move)
+            if(result) {
+                currentPlayer = chess.turn()
+                io.emit("move", move)
+                io.emit("boardState", chess.fen())
+            } else {
+                console.log("Invalid move:", move)
+                socket.emit("invalidMove", move)
+            }
+        } catch (err) {
+            console.log(err)
+            socket.emit("Invalid move:", move)
+        }
     })
 })
 server.listen(3000, () => {
