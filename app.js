@@ -137,7 +137,10 @@ io.on("connection", (socket) => {
     }
   })
 })
-
+app.get('/leaderboard', async (req, res) => {
+  const result = await pool.query('SELECT username, elo FROM users ORDER BY elo DESC LIMIT 10')
+  res.render('leaderboard', { players: result.rows })
+})
 server.listen(3000, () => {
   console.log("listening on port 3000")
 })

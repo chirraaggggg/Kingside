@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chess Master — Leaderboard</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0d0d0f;
+      color: #e8e6e1;
+      font-family: sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+    }
+    h1 {
+      font-size: 1.6rem;
+      color: #c9a84c;
+      letter-spacing: 0.15em;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    p {
+      color: #6b6b7a;
+      font-size: 0.85rem;
+      margin-bottom: 32px;
+      text-align: center;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .card {
+      background: #16161a;
+      border: 1px solid #2a2a32;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 500px;
+      overflow: hidden;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    thead {
+      background: #1e1e24;
+    }
+    thead th {
+      padding: 14px 20px;
+      text-align: left;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #c9a84c;
+    }
+    tbody tr {
+      border-top: 1px solid #2a2a32;
+      transition: background 0.15s;
+    }
+    tbody tr:hover { background: #1e1e24; }
+    tbody td {
+      padding: 14px 20px;
+      font-size: 0.9rem;
+    }
+    .rank {
+      color: #6b6b7a;
+      font-size: 0.85rem;
+      min-width: 40px;
+    }
+    .rank-1 { color: #ffd700; font-weight: 700; }
+    .rank-2 { color: #c0c0c0; font-weight: 600; }
+    .rank-3 { color: #cd7f32; font-weight: 600; }
+    .elo {
+      color: #c9a84c;
+      font-weight: 600;
+      text-align: right;
+    }
+    .back {
+      margin-top: 24px;
+      font-size: 0.83rem;
+      color: #6b6b7a;
+    }
+    .back a { color: #c9a84c; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <h1>LEADERBOARD</h1>
+  <p>Top Chess Players</p>
+
+  <div class="card">
+    <table>
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Player</th>
+          <th style="text-align:right">ELO</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% players.forEach((player, index) => { %>
+        <tr>
+          <td class="rank rank-<%= index + 1 %>"><%= index + 1 %></td>
+          <td><%= player.username %></td>
+          <td class="elo"><%= player.elo %></td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="back">
+    <a href="/">← Back to game</a>
+  </div>
+</body>
+</html>
