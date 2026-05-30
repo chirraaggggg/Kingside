@@ -191,7 +191,7 @@ const handleMove = (source, target) => {
   if (result) {
     lastMove = { from, to }
     updateMoveHistory(result.san)
-    socket.emit("move", move)
+    socket.emit("move", { roomId, move })
     selectedSquare = null
     possibleMoves = []
     renderBoard()
@@ -299,6 +299,11 @@ socket.on("connect_error", (err) => {
     window.location.href = "/login"
   }
 })
+
+// ─── Join Room on page load ─────────────────────────────────────────────────
+if (typeof roomId !== 'undefined' && roomId) {
+  socket.emit("joinRoom", roomId)
+}
 
 // ─── Initial Render ────────────────────────────────────────────────────────────
 renderBoard()
